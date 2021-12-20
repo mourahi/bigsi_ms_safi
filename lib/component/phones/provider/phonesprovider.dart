@@ -2,12 +2,10 @@ import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hive/hive.dart';
 
 class PhonesProvider with ChangeNotifier {
   List<Phone> _listphonesBox = [];
-  List<Phone> listPhonesFavoris = [];
-  List<String> listRefFavorisBox = []; // doit etre lier au box du hiver
+  List<Phone> listPhonesFavoris = []; // doit etre lier au box du hiver
 
   List<Phone> listphones = [];
   List<List<String>> mapcyclecommunes = [];
@@ -22,8 +20,7 @@ class PhonesProvider with ChangeNotifier {
     var res = await PhonesRepository.getPhones();
     print("appel PhoneRepository");
     if (res.isNotEmpty) {
-      listphones =
-          res[0]; // la valeur vient du box (je dois utliser box directement)
+      listphones = res[0];
       _listphonesBox = listphones.toList(); // doit etre rempler par box
       mapcyclecommunes = res[2];
 
@@ -40,18 +37,12 @@ class PhonesProvider with ChangeNotifier {
 
   getlistofPhonesfavoris() {
     // update du listview favoris
-    listPhonesFavoris = _listphonesBox
-        .where((el) => listRefFavorisBox.contains(el.ref))
-        .toList();
+    listPhonesFavoris = PhonesRepository.getPhonesFavoris();
     notifyListeners();
   }
 
-  setfavoris(String ref) {
-    listRefFavorisBox.contains(ref)
-        ? listRefFavorisBox.remove(ref)
-        : listRefFavorisBox.add(ref);
-// Todos ("je dois sauvegarder dans box(phones) ")
-
+  setfavoris(Phone ph) {
+    PhonesRepository.boxPhones.put(ph.indexhive, ph);
     getlistofPhonesfavoris();
   }
 

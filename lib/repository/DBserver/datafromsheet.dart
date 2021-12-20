@@ -12,7 +12,6 @@ class DataFromSheet {
         'docs.google.com',
         '/spreadsheets/d/${_dp['safi']}/gviz/tq',
         {'tqx': 'out:json', 'sheet': namesheet});
-
     var resp = await http.get(url);
     print("status code:${resp.statusCode}");
     var vv = resp.body.toString();

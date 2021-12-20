@@ -14,7 +14,7 @@ class PhoneItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("ItemPhone appel n:${n++}");
+    //print("ItemPhone appel n:${n++}");
     var prov = Provider.of<PhonesProvider>(context, listen: false);
     return Card(
         elevation: 1,
@@ -26,10 +26,8 @@ class PhoneItem extends StatelessWidget {
               onPressed: () {},
               icon: IconButton(
                   onPressed: () {
-                    //button add or remove favoris
                     phone.fav = !phone.fav;
-                    prov.setfavoris(phone.ref);
-                    print("click sur favoris ref=${phone.ref}");
+                    prov.setfavoris(phone);
                   },
                   icon: phone.fav
                       ? const Icon(Icons.favorite)

@@ -11,7 +11,7 @@ class PhonesListFavoris extends StatelessWidget {
     print("ListFavoris appel n:${n++}");
     return Consumer<PhonesProvider>(builder: (context, value, _) {
       return ListView.builder(
-          itemCount: value.listRefFavorisBox.length,
+          itemCount: value.listPhonesFavoris.length,
           itemBuilder: (BuildContext ctx, int ii) {
             return PhoneItem(i: ii, phone: value.listPhonesFavoris[ii]);
           });

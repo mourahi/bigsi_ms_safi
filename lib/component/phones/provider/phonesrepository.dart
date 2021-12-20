@@ -3,30 +3,40 @@ import 'package:bigsi_ms_safi/repository/DBserver/datafromsheet.dart';
 import 'package:hive/hive.dart';
 
 class PhonesRepository {
+  static Box<Phone> boxPhones = Hive.box<Phone>('phones');
+  static Box<String> boxCycles = Hive.box<String>('cycles');
+  static Box<List<String>> boxCommunescycle =
+      Hive.box<List<String>>('communescycle');
+
+  static clearAllBox() {
+    Hive.box<Phone>('phones').clear();
+    Hive.box<String>('cycles').clear();
+    Hive.box<List<String>>('communescycle').clear();
+  }
+
   static Future<List<dynamic>> getPhones() async {
     // dois faire le choix entre local et server
     var rr3 = [];
-    Box<Phone> boxPhones = Hive.box<Phone>('phones');
-    Box<String> boxCycles = Hive.box<String>('cycles');
-    Box<List<String>> boxCommunescycle =
-        Hive.box<List<String>>('communescycle');
-
-    if (boxPhones.isNotEmpty) {
-      print("Box existe, je te passe les données");
-      //print("boxCommunescycle ${boxCommunescycle.values}");
-    } else {
+    if (boxPhones.isEmpty) {
       print("boxphones est vide , je cherche dans internet puis remplir boxes");
       var resulat = await DataFromSheet.getDataForSheet();
       rr3 = listOfPhones(resulat);
       boxPhones.addAll(rr3[0]);
       boxCycles.addAll(rr3[1]);
       boxCommunescycle.addAll(rr3[2].values);
-      //boxCommunescycle.addAll(rr3[2]);
+      for (var k in boxPhones.keys) {
+        // ajout du indexhive à chaque Phone
+        var ph = boxPhones.get(k);
+        if (ph != null && k != null) {
+          ph.indexhive = k;
+          boxPhones.putAt(k, ph);
+        }
+      }
     }
     rr3 = [
-      boxPhones.values.map((e) => e).toList(),
-      boxCycles.values.map((e) => e).toList(),
-      boxCommunescycle.values.map((e) => e).toList()
+      boxPhones.values.toList(),
+      boxCycles.values.toList(),
+      boxCommunescycle.values.toList()
     ];
 
     return rr3; // list [listphones, listcatycle, listmapcommune]
@@ -51,5 +61,9 @@ class PhonesRepository {
       listphone.add(Phone.createPhone(row));
     }
     return [listphone, listcatcycle, mapcatcommune];
+  }
+
+  static List<Phone> getPhonesFavoris() {
+    return boxPhones.values.where((e) => e.fav == true).toList();
   }
 }
