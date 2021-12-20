@@ -13,23 +13,44 @@ class PageHome extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed('homepage');
+                Navigator.of(context).pushNamed('phonescomponent');
               },
               child: const Card(
-                child: Text("un"),
+                child: Center(
+                    child: Text(
+                  "الهاتف",
+                  style: TextStyle(fontSize: 25),
+                )),
                 color: Colors.green,
               ),
             ),
-            const Card(
-              child: Text("un"),
-              color: Colors.red,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('newscomponent');
+              },
+              child: const Card(
+                child: Center(
+                    child: Text(
+                  "المستجدات",
+                  style: TextStyle(fontSize: 25),
+                )),
+                color: Colors.red,
+              ),
             ),
             const Card(
-              child: Text("un"),
+              child: Center(
+                  child: Text(
+                "التكوينات",
+                style: TextStyle(fontSize: 25),
+              )),
               color: Colors.yellow,
             ),
             const Card(
-              child: Text("un"),
+              child: Center(
+                  child: Text(
+                "BigSI",
+                style: TextStyle(fontSize: 25),
+              )),
               color: Colors.orange,
             ),
           ],

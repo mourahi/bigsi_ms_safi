@@ -1,10 +1,11 @@
+import 'package:bigsi_ms_safi/component/news/newscomponent.dart';
+import 'package:bigsi_ms_safi/component/news/newslist.dart';
 import 'package:bigsi_ms_safi/component/phones/view/phonescomponent.dart';
 import 'package:bigsi_ms_safi/communicator/pagehome.dart';
 import 'package:bigsi_ms_safi/component/news/newsprovider.dart';
 import 'package:bigsi_ms_safi/component/news/newsview.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
-import 'package:bigsi_ms_safi/component/phones/view/phonespage.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
       home: const Directionality(
           textDirection: TextDirection.rtl, child: PageHome()),
       routes: {
-        'homepage': (BuildContext context) => const PhonesComponent(),
+        'phonescomponent': (BuildContext context) => const PhonesComponent(),
+        'newscomponent': (BuildContext context) => const NewsComponent(),
         'newsview': (BuildContext context) => const NewsView(),
         'pagechoice': (BuildContext context) => const PageHome()
       },
