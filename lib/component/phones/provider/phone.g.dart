@@ -28,14 +28,13 @@ class PhoneAdapter extends TypeAdapter<Phone> {
       fields[8] as String,
       fields[9] as String,
       fields[10] as bool,
-      fields[11] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Phone obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.ref)
       ..writeByte(1)
@@ -57,9 +56,7 @@ class PhoneAdapter extends TypeAdapter<Phone> {
       ..writeByte(9)
       ..write(obj.geo)
       ..writeByte(10)
-      ..write(obj.fav)
-      ..writeByte(11)
-      ..write(obj.indexhive);
+      ..write(obj.fav);
   }
 
   @override

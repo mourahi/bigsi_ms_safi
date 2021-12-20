@@ -25,15 +25,13 @@ class Phone extends HiveObject {
   final String geo;
   @HiveField(10)
   bool fav;
-  @HiveField(11)
-  int indexhive;
 
   static List<String> listcatcycle = [];
   static Map<String, List<String>> mapcatcommune = {};
 
   Phone(this.ref, this.cycle, this.commune, this.gresa, this.ecole, this.nom,
       this.tel, this.fonction, this.email, this.geo,
-      [this.fav = false, this.indexhive = -1]);
+      [this.fav = false]);
   Phone.vide()
       : ref = '',
         cycle = '',
@@ -45,8 +43,7 @@ class Phone extends HiveObject {
         fonction = '',
         email = '',
         geo = '',
-        fav = false,
-        indexhive = -1;
+        fav = false;
 
   factory Phone.createPhone(List<String> res) {
     return Phone(
@@ -60,7 +57,6 @@ class Phone extends HiveObject {
         res[7],
         res[8],
         res[9],
-        false,
-        -1); //deux autres sont facultative fav=false et indexhive=-1
+        false); //deux autres sont facultative fav=false et indexhive=-1
   }
 }

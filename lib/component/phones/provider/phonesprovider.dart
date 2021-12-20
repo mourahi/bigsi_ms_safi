@@ -4,7 +4,6 @@ import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
 import 'package:flutter/widgets.dart';
 
 class PhonesProvider with ChangeNotifier {
-  List<Phone> _listphonesBox = [];
   List<Phone> listPhonesFavoris = []; // doit etre lier au box du hiver
 
   List<Phone> listphones = [];
@@ -20,8 +19,7 @@ class PhonesProvider with ChangeNotifier {
     var res = await PhonesRepository.getPhones();
     print("appel PhoneRepository");
     if (res.isNotEmpty) {
-      listphones = res[0];
-      _listphonesBox = listphones.toList(); // doit etre rempler par box
+      listphones = res[0]; // doit etre rempler par box
       mapcyclecommunes = res[2];
 
       CycleProvider().updateCycle(res[1]);
@@ -42,7 +40,7 @@ class PhonesProvider with ChangeNotifier {
   }
 
   setfavoris(Phone ph) {
-    PhonesRepository.boxPhones.put(ph.indexhive, ph);
+    PhonesRepository.boxPhones.put(ph.ref, ph);
     getlistofPhonesfavoris();
   }
 
@@ -94,11 +92,10 @@ class PhonesProvider with ChangeNotifier {
   }
 
   _findPhonesByActiveCycles() {
+    var _p = PhonesRepository.boxPhones.values.toList();
     return activedcycle.isEmpty
-        ? _listphonesBox
-        : _listphonesBox
-            .where((ph) => activedcycle.contains(ph.cycle))
-            .toList();
+        ? _p
+        : _p.where((ph) => activedcycle.contains(ph.cycle)).toList();
   }
 
   _findPhonesByActiveCommunes() {

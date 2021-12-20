@@ -17,21 +17,19 @@ class PhonesRepository {
   static Future<List<dynamic>> getPhones() async {
     // dois faire le choix entre local et server
     var rr3 = [];
+    //clearAllBox();
     if (boxPhones.isEmpty) {
       print("boxphones est vide , je cherche dans internet puis remplir boxes");
       var resulat = await DataFromSheet.getDataForSheet();
       rr3 = listOfPhones(resulat);
-      boxPhones.addAll(rr3[0]);
+      // remplir phonebox par ref comme key
+      Map<String, Phone> phs = {};
+      for (var ph in rr3[0]) {
+        phs[ph.ref] = ph;
+      }
+      boxPhones.putAll(phs);
       boxCycles.addAll(rr3[1]);
       boxCommunescycle.addAll(rr3[2].values);
-      for (var k in boxPhones.keys) {
-        // ajout du indexhive à chaque Phone
-        var ph = boxPhones.get(k);
-        if (ph != null && k != null) {
-          ph.indexhive = k;
-          boxPhones.putAt(k, ph);
-        }
-      }
     }
     rr3 = [
       boxPhones.values.toList(),
