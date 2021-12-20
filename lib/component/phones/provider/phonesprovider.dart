@@ -35,7 +35,7 @@ class PhonesProvider with ChangeNotifier {
 
   getlistofPhonesfavoris() {
     // update du listview favoris
-    listPhonesFavoris = PhonesRepository.getPhonesFavoris();
+    listPhonesFavoris = PhonesRepository.getPhonesFavoris;
     notifyListeners();
   }
 
@@ -92,7 +92,7 @@ class PhonesProvider with ChangeNotifier {
   }
 
   _findPhonesByActiveCycles() {
-    var _p = PhonesRepository.boxPhones.values.toList();
+    var _p = PhonesRepository.getAllPhones;
     return activedcycle.isEmpty
         ? _p
         : _p.where((ph) => activedcycle.contains(ph.cycle)).toList();

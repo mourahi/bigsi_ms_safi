@@ -16,34 +16,28 @@ class PhonesRepository {
 
   static Future<List<dynamic>> getPhones() async {
     // dois faire le choix entre local et server
-    var rr3 = [];
-    //clearAllBox();
     if (boxPhones.isEmpty) {
       print("boxphones est vide , je cherche dans internet puis remplir boxes");
       var resulat = await DataFromSheet.getDataForSheet();
-      rr3 = listOfPhones(resulat);
-      // remplir phonebox par ref comme key
-      Map<String, Phone> phs = {};
-      for (var ph in rr3[0]) {
-        phs[ph.ref] = ph;
-      }
-      boxPhones.putAll(phs);
+      var rr3 = _listOfPhones(resulat);
+      boxPhones.putAll(rr3[0]);
       boxCycles.addAll(rr3[1]);
       boxCommunescycle.addAll(rr3[2].values);
+    } else {
+      print("Box est deja remplis, je vais profiter hhh");
     }
-    rr3 = [
+
+    return [
       boxPhones.values.toList(),
       boxCycles.values.toList(),
       boxCommunescycle.values.toList()
     ];
-
-    return rr3; // list [listphones, listcatycle, listmapcommune]
   }
 
 // prepare cycle et mapcommunebycycles
 
-  static List<dynamic> listOfPhones(List<List<String>> resultat) {
-    List<Phone> listphone = [];
+  static List<dynamic> _listOfPhones(List<List<String>> resultat) {
+    Map<String, Phone> listphone = {};
     List<String> listcatcycle = resultat.map((e) => e[1]).toSet().toList();
     Map<String, List<String>> mapcatcommune = {};
 
@@ -56,12 +50,20 @@ class PhonesRepository {
     }
 
     for (var row in resultat) {
-      listphone.add(Phone.createPhone(row));
+      listphone[row[0]] = Phone.createPhone(row);
     }
     return [listphone, listcatcycle, mapcatcommune];
   }
 
-  static List<Phone> getPhonesFavoris() {
+  static List<Phone> get getPhonesFavoris {
     return boxPhones.values.where((e) => e.fav == true).toList();
+  }
+
+  static List<Phone> get getAllPhones {
+    return boxPhones.values.toList();
+  }
+
+  static setFavoris(String ref, Phone ph) {
+    boxPhones.put(ref, ph);
   }
 }

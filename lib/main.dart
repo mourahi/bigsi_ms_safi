@@ -1,4 +1,5 @@
-import 'package:bigsi_ms_safi/communicator/homepage.dart';
+import 'package:bigsi_ms_safi/component/phones/view/phonescomponent.dart';
+import 'package:bigsi_ms_safi/communicator/pagehome.dart';
 import 'package:bigsi_ms_safi/component/news/newsprovider.dart';
 import 'package:bigsi_ms_safi/component/news/newsview.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
@@ -35,10 +36,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Directionality(
-          textDirection: TextDirection.rtl, child: HomePage()),
+          textDirection: TextDirection.rtl, child: PageHome()),
       routes: {
-        'phoneslist': (BuildContext context) => const PhonesPage(),
-        'newsview': (BuildContext context) => const NewsView()
+        'homepage': (BuildContext context) => const PhonesComponent(),
+        'newsview': (BuildContext context) => const NewsView(),
+        'pagechoice': (BuildContext context) => const PageHome()
       },
     );
   }
