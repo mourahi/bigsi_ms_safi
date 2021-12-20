@@ -24,7 +24,7 @@ class Phone extends HiveObject {
   @HiveField(9)
   final String geo;
   @HiveField(10)
-  final bool fav;
+  bool fav;
 
   static List<String> listcatcycle = [];
   static Map<String, List<String>> mapcatcommune = {};

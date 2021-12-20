@@ -2,6 +2,7 @@ import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
 
 class PhonesProvider with ChangeNotifier {
   List<Phone> _listphonesBox = [];
@@ -19,12 +20,11 @@ class PhonesProvider with ChangeNotifier {
 
   updateListPhonesfromRepository() async {
     var res = await PhonesRepository.getPhones();
+    print("appel PhoneRepository");
     if (res.isNotEmpty) {
-      listphones = res[0];
-
+      listphones =
+          res[0]; // la valeur vient du box (je dois utliser box directement)
       _listphonesBox = listphones.toList(); // doit etre rempler par box
-
-      print("mapcyclecommunes= ${res[2].length}");
       mapcyclecommunes = res[2];
 
       CycleProvider().updateCycle(res[1]);
@@ -39,6 +39,7 @@ class PhonesProvider with ChangeNotifier {
   }
 
   getlistofPhonesfavoris() {
+    // update du listview favoris
     listPhonesFavoris = _listphonesBox
         .where((el) => listRefFavorisBox.contains(el.ref))
         .toList();
@@ -49,6 +50,8 @@ class PhonesProvider with ChangeNotifier {
     listRefFavorisBox.contains(ref)
         ? listRefFavorisBox.remove(ref)
         : listRefFavorisBox.add(ref);
+// Todos ("je dois sauvegarder dans box(phones) ")
+
     getlistofPhonesfavoris();
   }
 
@@ -61,7 +64,7 @@ class PhonesProvider with ChangeNotifier {
       // déja false et il veux activé cycle
       b[indexCycle] = true; // active item du cycle
       activedcycle.add(c[indexCycle]);
-      if (a != null) activelistcommunes.addAll(a);
+      activelistcommunes.addAll(a);
     } else {
       b[indexCycle] = false;
       activedcycle.remove(c[indexCycle]);
@@ -70,7 +73,7 @@ class PhonesProvider with ChangeNotifier {
     activelistcommunes.clear();
     for (var x in activedcycle) {
       var nn = mapcyclecommunes[CycleProvider().listcatcycles.indexOf(x)];
-      if (nn != null) activelistcommunes.addAll(nn);
+      activelistcommunes.addAll(nn);
     }
 
     activelistcommunes =

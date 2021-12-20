@@ -10,9 +10,12 @@ class PhoneItem extends StatelessWidget {
   const PhoneItem({Key? key, required this.i, required this.phone})
       : super(key: key);
 
+  static int n = 0;
+
   @override
   Widget build(BuildContext context) {
-    var prov = Provider.of<PhonesProvider>(context);
+    print("ItemPhone appel n:${n++}");
+    var prov = Provider.of<PhonesProvider>(context, listen: false);
     return Card(
         elevation: 1,
         child: ListTile(
@@ -24,10 +27,11 @@ class PhoneItem extends StatelessWidget {
               icon: IconButton(
                   onPressed: () {
                     //button add or remove favoris
+                    phone.fav = !phone.fav;
                     prov.setfavoris(phone.ref);
                     print("click sur favoris ref=${phone.ref}");
                   },
-                  icon: prov.listRefFavorisBox.contains(phone.ref)
+                  icon: phone.fav
                       ? const Icon(Icons.favorite)
                       : const Icon(Icons.favorite_outline))),
           onTap: () {

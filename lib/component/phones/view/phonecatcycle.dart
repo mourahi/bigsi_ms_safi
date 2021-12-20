@@ -5,15 +5,16 @@ import 'package:provider/provider.dart';
 
 class PhoneCatCycle extends StatelessWidget {
   const PhoneCatCycle({Key? key}) : super(key: key);
-
+  static int n = 0;
   @override
   Widget build(BuildContext context) {
+    print("cycle horizontal appel n:${n++}");
     return Visibility(
       visible: true,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Consumer<CycleProvider>(
-          builder: (context, cat, child) {
+          builder: (context, cat, _) {
             // cat horizontal
             return ToggleButtons(
               selectedColor: Colors.black,
@@ -32,7 +33,6 @@ class PhoneCatCycle extends StatelessWidget {
   }
 
   List<Widget> _creatcat(List<String> cat) {
-    print("je suis ici catCycle(Horizontal).length = ${cat.length} , cat=$cat");
     List<Widget> s = [];
     for (var i in cat) {
       s.add(Text(i));

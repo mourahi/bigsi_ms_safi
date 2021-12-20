@@ -28,7 +28,8 @@ class PhonesPage extends StatelessWidget {
           children: [
             Column(
               children: [
-                const PhoneCatCycle(), // categorie cycle
+                const PhoneCatCycle(),
+// categorie cycle
                 Expanded(
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,

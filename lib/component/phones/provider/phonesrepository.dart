@@ -11,11 +11,6 @@ class PhonesRepository {
     Box<List<String>> boxCommunescycle =
         Hive.box<List<String>>('communescycle');
 
-    //clear pour test
-    /* boxPhones.clear();
-    boxCycles.clear();
-    boxCommunescycle.clear(); */
-
     if (boxPhones.isNotEmpty) {
       print("Box existe, je te passe les données");
       //print("boxCommunescycle ${boxCommunescycle.values}");

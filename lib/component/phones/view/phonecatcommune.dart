@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 
 class PhoneCatCommune extends StatelessWidget {
   const PhoneCatCommune({Key? key}) : super(key: key);
-
+  static int n = 0;
   @override
   Widget build(BuildContext context) {
+    print("communes vertical appel n:${n++}");
     return Consumer<PhonesProvider>(builder: (context, cat, _) {
       return Visibility(
         // ignore: prefer_contains
@@ -28,7 +29,6 @@ class PhoneCatCommune extends StatelessWidget {
   }
 
   List<Widget> _creatcat(List<String> ca) {
-    print("je suis ici catCommune(vertical).length = ${ca.indexOf('')}");
     List<Widget> s = [];
     for (var i in ca) {
       s.add(Text(i));

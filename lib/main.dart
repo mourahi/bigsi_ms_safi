@@ -12,9 +12,9 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PhoneAdapter());
-  Hive.openBox<Phone>('phones');
-  Hive.openBox<String>('cycles');
-  Hive.openBox<List<String>>('communescycle');
+  await Hive.openBox<Phone>('phones');
+  await Hive.openBox<String>('cycles');
+  await Hive.openBox<List<String>>('communescycle');
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => PhonesProvider()),
