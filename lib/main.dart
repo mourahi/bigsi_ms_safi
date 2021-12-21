@@ -1,3 +1,4 @@
+import 'package:bigsi_ms_safi/component/formation/formationcomponent.dart';
 import 'package:bigsi_ms_safi/component/news/newscomponent.dart';
 import 'package:bigsi_ms_safi/component/news/newslist.dart';
 import 'package:bigsi_ms_safi/component/phones/view/phonescomponent.dart';
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
       routes: {
         'phonescomponent': (BuildContext context) => const PhonesComponent(),
         'newscomponent': (BuildContext context) => const NewsComponent(),
+        'formationcomponent': (BuildContext context) =>
+            const FormationComponent(),
         'newsview': (BuildContext context) => const NewsView(),
         'pagechoice': (BuildContext context) => const PageHome()
       },

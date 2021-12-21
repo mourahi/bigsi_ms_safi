@@ -37,13 +37,18 @@ class PageHome extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-            const Card(
-              child: Center(
-                  child: Text(
-                "التكوينات",
-                style: TextStyle(fontSize: 25),
-              )),
-              color: Colors.yellow,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed("formationcomponent");
+              },
+              child: const Card(
+                child: Center(
+                    child: Text(
+                  "التكوينات",
+                  style: TextStyle(fontSize: 25),
+                )),
+                color: Colors.yellow,
+              ),
             ),
             const Card(
               child: Center(
