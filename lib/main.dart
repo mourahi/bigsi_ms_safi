@@ -1,5 +1,8 @@
 import 'package:bigsi_ms_safi/communicator/pagehomeprovider.dart';
 import 'package:bigsi_ms_safi/component/formation/formationcomponent.dart';
+import 'package:bigsi_ms_safi/component/groupsphone/groupsphone.dart';
+import 'package:bigsi_ms_safi/component/groupsphone/groupsphonecomponent.dart';
+import 'package:bigsi_ms_safi/component/groupsphone/groupsphoneprovider.dart';
 import 'package:bigsi_ms_safi/component/news/news.dart';
 import 'package:bigsi_ms_safi/component/news/newscomponent.dart';
 import 'package:bigsi_ms_safi/component/phones/view/phonescomponent.dart';
@@ -17,17 +20,20 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PhoneAdapter());
   Hive.registerAdapter(NewsAdapter());
+  Hive.registerAdapter(GroupsPhoneAdapter());
   await Hive.openBox<Phone>('phones');
   await Hive.openBox<String>('cycles');
   await Hive.openBox<List<String>>('communescycle');
   await Hive.openBox<News>('news');
   await Hive.openBox<String>('catnews');
+  await Hive.openBox<GroupsPhone>('groupsphone');
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => PhonesProvider()),
     ChangeNotifierProvider(create: (context) => CycleProvider()),
     ChangeNotifierProvider(create: (context) => NewsProvider()),
     ChangeNotifierProvider(create: (context) => PageHomeProvider()),
+    ChangeNotifierProvider(create: (context) => GroupsPhoneProvider()),
   ], child: const MyApp()));
 }
 
@@ -50,7 +56,9 @@ class MyApp extends StatelessWidget {
         'formationcomponent': (BuildContext context) =>
             const FormationComponent(),
         'newsview': (BuildContext context) => const NewsView(),
-        'pagechoice': (BuildContext context) => const PageHome()
+        'pagechoice': (BuildContext context) => const PageHome(),
+        'groupsphonecomponent': (BuildContext context) =>
+            const GroupsPhoneComponent()
       },
     );
   }

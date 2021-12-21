@@ -13,7 +13,6 @@ class NewsRepository {
       var d = await DataFromSheet.getDataForSheet(namesheet: 'news');
       var rr2 = _listOfNews(d);
       boxNews.putAll(rr2[0]);
-      print("rr2[1] =${rr2[1]}");
       boxCatNews.addAll(rr2[1]);
     }
     return [

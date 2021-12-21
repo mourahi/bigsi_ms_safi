@@ -12,6 +12,7 @@ class DataFromSheet {
         'docs.google.com',
         '/spreadsheets/d/${_dp['safi']}/gviz/tq',
         {'tqx': 'out:json', 'sheet': namesheet});
+    // print("url = $url");
     var resp = await http.get(url);
     print("status code:${resp.statusCode}");
     var vv = resp.body.toString();
@@ -28,7 +29,7 @@ class DataFromSheet {
     var rr = convert.jsonDecode(vv);
     List<List<String>> resultat = [];
 
-    for (var i = 1; i < rr.length; i++) {
+    for (var i = 0; i < rr.length; i++) {
       // i=1 we don't need columns title
       var cc = rr[i]['c'];
       List<String> temp = [];

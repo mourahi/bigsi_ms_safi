@@ -3,6 +3,13 @@ import 'package:bigsi_ms_safi/component/news/newsrepository.dart';
 import 'package:flutter/widgets.dart';
 
 class NewsProvider with ChangeNotifier {
+  // rendre la class signlton
+  static final NewsProvider _phonesProvider = NewsProvider._internal();
+  factory NewsProvider() {
+    return _phonesProvider;
+  }
+  NewsProvider._internal();
+
   List<News> listNews = [];
   List<News> _listNews = [];
   List<String> listCatNews = [];

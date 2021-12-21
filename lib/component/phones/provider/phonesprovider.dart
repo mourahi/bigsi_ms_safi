@@ -1,10 +1,19 @@
+import 'package:bigsi_ms_safi/communicator/pagehomeprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class PhonesProvider with ChangeNotifier {
-  List<Phone> listPhonesFavoris = []; // doit etre lier au box du hiver
+  // rendre la class signlton
+  static final PhonesProvider _phonesProvider = PhonesProvider._internal();
+  factory PhonesProvider() {
+    return _phonesProvider;
+  }
+  PhonesProvider._internal();
+
+  List<Phone> listPhonesFavoris = []; // doit etre lier au box du hive
 
   List<Phone> listphones = [];
   List<List<String>> mapcyclecommunes = [];
