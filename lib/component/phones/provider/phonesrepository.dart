@@ -8,11 +8,11 @@ class PhonesRepository {
   static Box<List<String>> boxCommunescycle =
       Hive.box<List<String>>('communescycle');
 
-  static clearAllBox() {
+/*   static clearAllBox() {
     Hive.box<Phone>('phones').clear();
     Hive.box<String>('cycles').clear();
     Hive.box<List<String>>('communescycle').clear();
-  }
+  } */
 
   static Future<List<dynamic>> getPhones() async {
     // dois faire le choix entre local et server

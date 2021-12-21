@@ -1,10 +1,13 @@
+import 'package:bigsi_ms_safi/communicator/pagehomeprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PageHome extends StatelessWidget {
   const PageHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    PageHomeProvider nbrs = Provider.of<PageHomeProvider>(context);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -15,11 +18,11 @@ class PageHome extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed('phonescomponent');
               },
-              child: const Card(
+              child: Card(
                 child: Center(
                     child: Text(
-                  "الهاتف",
-                  style: TextStyle(fontSize: 25),
+                  "الهاتف (${nbrs.nbrPhones})",
+                  style: const TextStyle(fontSize: 25),
                 )),
                 color: Colors.green,
               ),

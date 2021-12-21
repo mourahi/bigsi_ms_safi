@@ -1,4 +1,5 @@
 import 'package:bigsi_ms_safi/communicator/mydrawer.dart';
+import 'package:bigsi_ms_safi/component/news/news.dart';
 import 'package:bigsi_ms_safi/component/news/newsprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesprovider.dart';
@@ -22,6 +23,8 @@ class PhonesComponent extends StatelessWidget {
                     Hive.box<Phone>('phones').clear();
                     Hive.box<String>('cycles').clear();
                     Hive.box<List<String>>('communescycle').clear();
+                    Hive.box<News>('news').clear();
+                    Hive.box<String>('catnews').clear();
                   },
                   icon: const Icon(Icons.delete))
             ],
