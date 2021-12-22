@@ -60,13 +60,18 @@ class PageHome extends StatelessWidget {
                   color: Colors.yellow,
                 ),
               ),
-              const Card(
-                child: Center(
-                    child: Text(
-                  "BigSI",
-                  style: TextStyle(fontSize: 25),
-                )),
-                color: Colors.orange,
+              GestureDetector(
+                onTap: () {
+                  data.clearBox();
+                },
+                child: const Card(
+                  child: Center(
+                      child: Text(
+                    "Effacer BOX",
+                    style: TextStyle(fontSize: 25),
+                  )),
+                  color: Colors.orange,
+                ),
               ),
             ],
           );

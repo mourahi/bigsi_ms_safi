@@ -1,8 +1,6 @@
 import 'package:bigsi_ms_safi/component/groupsphone/groupsphoneprovider.dart';
 import 'package:bigsi_ms_safi/component/groupsphone/groupsphonerepository.dart';
-import 'package:bigsi_ms_safi/component/news/newsprovider.dart';
 import 'package:bigsi_ms_safi/component/news/newsrepository.dart';
-import 'package:bigsi_ms_safi/component/phones/provider/phonesprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,7 +10,7 @@ class PageHomeProvider with ChangeNotifier {
   int nbrgroups = 0;
 
   prepareData() async {
-    _clearBox();
+    // _clearBox();
 
     var a = await PhonesRepository.getPhones();
     nbrPhones = a[0].length;
@@ -20,7 +18,7 @@ class PageHomeProvider with ChangeNotifier {
 
     var c = await GroupsPhoneRepository.getGroupsPhone();
     nbrgroups = c.length;
-    //GroupsPhoneProvider().updateGroupsPhoneFromRepository();
+    GroupsPhoneProvider().updateGroupsPhoneFromRepository();
 
     var b = await NewsRepository.getNews();
     nbrNews = b[0].length;
@@ -30,7 +28,7 @@ class PageHomeProvider with ChangeNotifier {
     print("ph =$nbrPhones  groups=$nbrgroups  news=$nbrNews");
   }
 
-  void _clearBox() {
+  void clearBox() {
     PhonesRepository.boxPhones.clear();
     PhonesRepository.boxCommunescycle.clear();
     PhonesRepository.boxCycles.clear();

@@ -1,3 +1,4 @@
+import 'package:bigsi_ms_safi/component/groupsphone/groupsphone.dart';
 import 'package:bigsi_ms_safi/component/groupsphone/groupsphonerepository.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
 import 'package:flutter/widgets.dart';
@@ -21,8 +22,9 @@ class GroupsPhoneProvider with ChangeNotifier {
     }
   }
 
-  savePhonesToBox() async {
-    PhonesRepository.savePhonesToBox();
+  savePhonesToBox(GroupsPhone gh) async {
+    PhonesRepository.savePhonesToBox(); // save phons to box
+    GroupsPhoneRepository.saveChangeToGroupPhone(gh);
     notifyListeners();
   }
 }
