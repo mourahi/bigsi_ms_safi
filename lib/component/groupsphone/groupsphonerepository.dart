@@ -6,16 +6,10 @@ class GroupsPhoneRepository {
   static Box<GroupsPhone> boxGroupsPhone = Hive.box<GroupsPhone>('groupsphone');
 
   static Future<List<dynamic>> getGroupsPhone() async {
-    // dois faire le choix entre local et server
-
-    //boxGroupsPhone.clear(); // provisoire
-
     if (boxGroupsPhone.isEmpty) {
       print("boxGroupsPhone vide, je cherche internet et sauvegarde");
       var d = await DataFromSheet.getDataForSheet(namesheet: 'groupsphone');
-      print("d=$d");
       var rr2 = _listOfGroupsPhone(d);
-      print("rr2= $rr2");
       boxGroupsPhone.putAll(rr2);
     }
     return boxGroupsPhone.values.toList();
@@ -28,5 +22,9 @@ class GroupsPhoneRepository {
       listgroupsphone[row[0].toString()] = GroupsPhone.createPhone(row);
     }
     return listgroupsphone;
+  }
+
+  static saveChangeToGroupPhone(GroupsPhone gh) {
+    if (boxGroupsPhone.isNotEmpty) boxGroupsPhone.put(gh.numero, gh);
   }
 }

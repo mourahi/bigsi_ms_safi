@@ -1,4 +1,3 @@
-import 'package:bigsi_ms_safi/communicator/pagehomeprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
@@ -14,7 +13,6 @@ class PhonesProvider with ChangeNotifier {
   PhonesProvider._internal();
 
   List<Phone> listPhonesFavoris = []; // doit etre lier au box du hive
-
   List<Phone> listphones = [];
   List<List<String>> mapcyclecommunes = [];
 

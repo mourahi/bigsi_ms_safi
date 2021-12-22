@@ -1,5 +1,5 @@
 import 'package:bigsi_ms_safi/communicator/pagehomeprovider.dart';
-import 'package:bigsi_ms_safi/component/news/newsprovider.dart';
+import 'package:bigsi_ms_safi/component/groupsphone/groupsphoneprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +22,8 @@ class PageHome extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed('phonescomponent');
+                  Navigator.of(context).pushNamed('groupsphonecomponent');
+                  GroupsPhoneProvider().updateGroupsPhoneFromRepository();
                 },
                 child: Card(
                   child: Center(
@@ -36,8 +37,6 @@ class PageHome extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushNamed('newscomponent');
-                  Provider.of<NewsProvider>(context, listen: false)
-                      .updateNewsFromRepository();
                 },
                 child: Card(
                   child: Center(
