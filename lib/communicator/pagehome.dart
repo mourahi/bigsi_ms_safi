@@ -1,19 +1,22 @@
+// ignore_for_file: avoid_print
+
 import 'package:bigsi_ms_safi/communicator/pagehomeprovider.dart';
-import 'package:bigsi_ms_safi/component/groupsphone/groupsphoneprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PageHome extends StatelessWidget {
   const PageHome({Key? key}) : super(key: key);
+  static int n = 0;
   @override
   Widget build(BuildContext context) {
+    print("PageHome n= ${n++}");
     var ok = false;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         body: Consumer<PageHomeProvider>(builder: (context, data, _) {
-          print("je lance la recherche data");
           if (ok == false) {
+            print("prepare data from pagehome");
             data.prepareData();
             ok = true;
           }
@@ -22,8 +25,8 @@ class PageHome extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
+                  data.updateGroupsPhoneFromRepository();
                   Navigator.of(context).pushNamed('groupsphonecomponent');
-                  GroupsPhoneProvider().updateGroupsPhoneFromRepository();
                 },
                 child: Card(
                   child: Center(

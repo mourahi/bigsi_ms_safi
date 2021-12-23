@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/repository/DBserver/datafromsheet.dart';
 import 'package:hive/hive.dart';
@@ -17,32 +19,35 @@ class PhonesRepository {
 
   static List<List<String>> resultat = [];
   static List<Phone> _livephones = [];
+  static var _rr3 = [];
 
   static savePhonesToBox() async {
-    print("savePHonetobox");
     if (resultat.isEmpty) {
-      print("resultat is emplty,i look in server");
+      print("savePhonesToBox: resultat is emplty,i look in server");
       resultat = await DataFromSheet.getDataForSheet();
     }
-    var rr3 = _listOfPhones(resultat, false);
-    boxPhones.putAll(rr3[0]);
-    boxCycles.addAll(rr3[1]);
-    boxCommunescycle.addAll(rr3[2].values);
+    print("save PHones to box");
+    _rr3 = _listOfPhones(resultat, false);
+    boxPhones.putAll(_rr3[0]);
+    boxCycles.addAll(_rr3[1]);
+    boxCommunescycle.addAll(_rr3[2].values);
   }
 
   static Future<List<dynamic>> getPhones() async {
-    var rr3 = [];
     if (boxPhones.values.isEmpty) {
-      if (resultat.isEmpty) resultat = await DataFromSheet.getDataForSheet();
-      rr3 = _listOfPhones(resultat, true);
+      if (resultat.isEmpty) {
+        resultat = await DataFromSheet.getDataForSheet();
+        _rr3 = _listOfPhones(resultat, true);
+        _livephones = _rr3[0];
+      }
       print("return phones live");
-      _livephones = rr3[0];
-      return [_livephones, rr3[1], rr3[2].values.toList()];
+
+      return [_livephones, _rr3[1], _rr3[2].values.toList()];
     } else {
       print("phones from box : ${boxPhones.values.length}");
-      //await savePhonesToBox();
+      _livephones = boxPhones.values.toList();
       return [
-        boxPhones.values.toList(),
+        _livephones,
         boxCycles.values.toList(),
         boxCommunescycle.values.toList()
       ];
@@ -75,17 +80,21 @@ class PhonesRepository {
   }
 
   static List<Phone> get getPhonesFavoris {
-    var x = boxPhones.isNotEmpty ? boxPhones.values : _livephones.toList();
+    var x = boxPhones.values.isNotEmpty
+        ? boxPhones.values.toList()
+        : _livephones.toList();
     return x.where((e) => e.fav == true).toList();
   }
 
   static List<Phone> get getAllPhones {
-    var x = boxPhones.isNotEmpty ? boxPhones.values : _livephones.toList();
+    var x =
+        boxPhones.values.isNotEmpty ? boxPhones.values : _livephones.toList();
     return x.toList();
   }
 
-  static setFavoris(String ref, Phone ph) {
-    if (boxPhones.isNotEmpty) {
+  static setFavoris(String ref, Phone ph, liveindex) {
+    _livephones[liveindex] = ph;
+    if (boxPhones.values.isNotEmpty) {
       boxPhones.put(ref, ph);
     }
   }

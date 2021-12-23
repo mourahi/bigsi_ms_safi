@@ -11,20 +11,16 @@ class PageHomeProvider with ChangeNotifier {
 
   prepareData() async {
     // _clearBox();
+    /*   var a = await PhonesRepository.getPhones();
+    nbrPhones = a[0].length; */
 
-    var a = await PhonesRepository.getPhones();
-    nbrPhones = a[0].length;
-    //PhonesProvider().updateListPhonesfromRepository();
+/*     var c = await GroupsPhoneRepository.getGroupsPhone();
+    nbrgroups = c.length; */
 
-    var c = await GroupsPhoneRepository.getGroupsPhone();
-    nbrgroups = c.length;
-    GroupsPhoneProvider().updateGroupsPhoneFromRepository();
+/*     var b = await NewsRepository.getNews();
+    nbrNews = b[0].length; */
 
-    var b = await NewsRepository.getNews();
-    nbrNews = b[0].length;
-    //NewsProvider().updateNewsFromRepository();
-
-    notifyListeners();
+    // notifyListeners();
     print("ph =$nbrPhones  groups=$nbrgroups  news=$nbrNews");
   }
 
@@ -35,5 +31,9 @@ class PageHomeProvider with ChangeNotifier {
     NewsRepository.boxCatNews.clear();
     NewsRepository.boxNews.clear();
     GroupsPhoneRepository.boxGroupsPhone.clear();
+  }
+
+  updateGroupsPhoneFromRepository() {
+    GroupsPhoneProvider().updateGroupsPhoneFromRepository();
   }
 }

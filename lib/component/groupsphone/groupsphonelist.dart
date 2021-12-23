@@ -1,6 +1,5 @@
 import 'package:bigsi_ms_safi/component/groupsphone/groupsphone.dart';
 import 'package:bigsi_ms_safi/component/groupsphone/groupsphoneprovider.dart';
-import 'package:bigsi_ms_safi/component/phones/provider/phonesprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +39,7 @@ class GroupsPhoneList extends StatelessWidget {
               ? const Icon(Icons.save)
               : const Icon(Icons.save_alt)),
       onTap: () {
-        PhonesProvider().updateListPhonesfromRepository();
+        p.updateListPhonesfromRepository();
         Navigator.of(context).pushNamed('phonescomponent', arguments: ns);
       },
     ));

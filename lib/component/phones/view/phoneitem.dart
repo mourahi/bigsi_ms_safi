@@ -27,7 +27,7 @@ class PhoneItem extends StatelessWidget {
               icon: IconButton(
                   onPressed: () {
                     phone.fav = !phone.fav;
-                    prov.setfavoris(phone);
+                    prov.setfavoris(phone, i);
                   },
                   icon: phone.fav
                       ? const Icon(Icons.favorite)

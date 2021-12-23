@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:bigsi_ms_safi/component/groupsphone/groupsphone.dart';
 import 'package:bigsi_ms_safi/repository/DBserver/datafromsheet.dart';
 import 'package:hive/hive.dart';
@@ -6,8 +8,9 @@ class GroupsPhoneRepository {
   static Box<GroupsPhone> boxGroupsPhone = Hive.box<GroupsPhone>('groupsphone');
 
   static Future<List<dynamic>> getGroupsPhone() async {
+    print("getGroupPHones");
     if (boxGroupsPhone.isEmpty) {
-      print("boxGroupsPhone vide, je cherche internet et sauvegarde");
+      print("boxGroupsPhone.isEmpty, je cherche internet et sauvegarde");
       var d = await DataFromSheet.getDataForSheet(namesheet: 'groupsphone');
       var rr2 = _listOfGroupsPhone(d);
       boxGroupsPhone.putAll(rr2);
@@ -25,6 +28,7 @@ class GroupsPhoneRepository {
   }
 
   static saveChangeToGroupPhone(GroupsPhone gh) {
+    print("saveChangeToGroupPhone icon save hhh, penser à supprimer aussi");
     if (boxGroupsPhone.isNotEmpty) boxGroupsPhone.put(gh.numero, gh);
   }
 }

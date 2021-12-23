@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:bigsi_ms_safi/component/phones/provider/cycleprovider.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phone.dart';
 import 'package:bigsi_ms_safi/component/phones/provider/phonesrepository.dart';
@@ -24,18 +26,17 @@ class PhonesProvider with ChangeNotifier {
 
   updateListPhonesfromRepository() async {
     var res = await PhonesRepository.getPhones();
-    print("appel PhoneRepository");
-    if (res.isNotEmpty) {
-      listphones = res[0]; // doit etre rempler par box
-      mapcyclecommunes = res[2];
+    print("appel Phones depuis PHonesRepository");
 
-      CycleProvider().updateCycle(res[1]);
-      activedcycle = []; // a remplacer par celui du cycleprovider
-      activedcommune = [];
-      activelistcommunes = [];
-      activelistcommunesbool = [];
-      getlistofPhonesfavoris();
-    }
+    listphones = res[0];
+    mapcyclecommunes = res[2];
+
+    CycleProvider().updateCycle(res[1]);
+    activedcycle = []; // a remplacer par celui du cycleprovider
+    activedcommune = [];
+    activelistcommunes = [];
+    activelistcommunesbool = [];
+    getlistofPhonesfavoris();
 
     notifyListeners();
   }
@@ -46,8 +47,8 @@ class PhonesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  setfavoris(Phone ph) {
-    PhonesRepository.boxPhones.put(ph.ref, ph);
+  setfavoris(Phone ph, int liveindex) {
+    PhonesRepository.setFavoris(ph.ref, ph, liveindex);
     getlistofPhonesfavoris();
   }
 
