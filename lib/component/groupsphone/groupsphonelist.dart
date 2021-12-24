@@ -31,7 +31,6 @@ class GroupsPhoneList extends StatelessWidget {
       leading: const Icon(Icons.ac_unit),
       trailing: IconButton(
           onPressed: () {
-            print("je dois sauvegarder dans boxphone avec refgroup");
             ns.saved = true;
             p.savePhonesToBox(ns);
           },

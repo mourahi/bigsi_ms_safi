@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 
 class GroupsPhoneRepository {
   static Box<GroupsPhone> boxGroupsPhone = Hive.box<GroupsPhone>('groupsphone');
+  // TODO : Cherche par internet les nouvelles groups phones et les updates
 
   static Future<List<dynamic>> getGroupsPhone() async {
     print("getGroupPHones");
@@ -29,6 +30,14 @@ class GroupsPhoneRepository {
 
   static saveChangeToGroupPhone(GroupsPhone gh) {
     print("saveChangeToGroupPhone icon save hhh, penser à supprimer aussi");
-    if (boxGroupsPhone.isNotEmpty) boxGroupsPhone.put(gh.numero, gh);
+    if (boxGroupsPhone.isNotEmpty) {
+      if (gh.saved) {
+        boxGroupsPhone.put(gh.numero, gh);
+        print("save groups numero :" + gh.numero);
+      } else {
+        boxGroupsPhone.delete(gh.numero);
+        print("delet groups numero :" + gh.numero);
+      }
+    }
   }
 }

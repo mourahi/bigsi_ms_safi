@@ -13,7 +13,12 @@ class DataFromSheet {
         '/spreadsheets/d/${_dp['safi']}/gviz/tq',
         {'tqx': 'out:json', 'sheet': namesheet});
     // print("url = $url");
-    var resp = await http.get(url);
+    var resp = await http.get(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
     print("status code:${resp.statusCode}");
     var vv = resp.body.toString();
     var ind = vv.indexOf('"rows":');

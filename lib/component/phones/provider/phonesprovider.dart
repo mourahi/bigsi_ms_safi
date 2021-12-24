@@ -26,7 +26,7 @@ class PhonesProvider with ChangeNotifier {
 
   updateListPhonesfromRepository() async {
     var res = await PhonesRepository.getPhones();
-    print("appel Phones depuis PHonesRepository");
+    print("Reçu Phones depuis PHonesRepository");
 
     listphones = res[0];
     mapcyclecommunes = res[2];
